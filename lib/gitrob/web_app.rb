@@ -177,12 +177,14 @@ module Gitrob
       erb :"assessments/compare"
     end
 
+    #Zendesk - Get request for false_positive table
     get "/assessments/:id/false_positives" do
       @assessment = find_assessment(params[:id])
       @falsePositive = Gitrob::Models::FalsePositive.order(:repository)
       erb :"assessments/false_positive"
     end
 
+    #Zendesk - Get request for false_positive table
     get "/assessments/:id/:findingID/false_positives" do
       @assessment = find_assessment(params[:id])
 
@@ -200,11 +202,13 @@ module Gitrob
       erb :"assessments/false_positive"
     end
 
+    #Zendesk - Get request for false_positive table
     get "/falsePositive/_table" do
       @falsePositive = Gitrob::Models::FalsePositive.order(:repository)
       erb :"assessments/_falsePositiveTable", :layout => false
     end
-    
+
+    #Zendesk - Delete false positive fingerprints
     delete "/false_positive/:id" do
       @falsePositive = Gitrob::Models::FalsePositive.first(
         :id       => params[:id].to_i,
@@ -212,6 +216,7 @@ module Gitrob
       @falsePositive.destroy
     end
 
+    #Zendesk - Add new false positive fingerprints
     post "/falsePositive" do
       @fingerprint = Gitrob::Models::FalsePositive.new
       @fingerprint.fingerprint = params[:falsePositive][:fingerprint]
