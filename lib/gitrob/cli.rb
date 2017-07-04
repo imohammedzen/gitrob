@@ -146,16 +146,19 @@ module Gitrob
       def prepare_user
         @gitrobUser = Gitrob::Models::GitrobUser.all
         if @gitrobUser.count == 0
+          username = "gitrob"
+          random_string = SecureRandom.base64(75)
           puts "\033[0;31m"
-          puts "============================"
+          puts "============================================================"
+          puts "Password only generated once. Please save it somewhere safe!"
           puts "Creating new User for Gitrob"
-          puts "Username: " + configuration["gitrob_username"]
-          puts "Password: " + configuration["gitrob_password"]
-          puts "============================"
+          puts "Username: " + username
+          puts "Password: " + random_string
+          puts "============================================================"
           puts "\e[0"
           @user = Gitrob::Models::GitrobUser.new
-          @user.username = configuration["gitrob_username"]
-          @user.password = configuration["gitrob_password"]
+          @user.username = username
+          @user.password = random_string
           @user.save       
         end
       end
