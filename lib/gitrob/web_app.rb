@@ -267,7 +267,9 @@ module Gitrob
     get "/assessments/:id/false_positives" do
       env['warden'].authenticate!
       @assessment = find_assessment(params[:id])
-      @falsePositive = Gitrob::Models::FalsePositive.order(:repository).all
+      @findings = @assessment.blobs_dataset.where("flags_count != 0").first()
+      @repo_name = @findings.repository.full_name.partition('/').first
+      @falsePositive = Gitrob::Models::FalsePositive.where("repository LIKE ?", (@repo_name)+'%').order(:repository).all
       erb :"assessments/false_positive"
     end
 
