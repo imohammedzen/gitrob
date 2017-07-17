@@ -271,7 +271,9 @@ module Gitrob
       erb :"assessments/false_positive"
     end
 
-    #Get request for false_positive table
+    #Get request for false_positive table - Not Used anymore. Leaving it in
+    #for future reference if needed. Linking between different tables to get
+    #the information
     get "/assessments/:id/:findingID/false_positives" do
       env['warden'].authenticate!
       @assessment = find_assessment(params[:id])
@@ -287,7 +289,6 @@ module Gitrob
         @repo_name = r.full_name  
       end
       @falsePositive = Gitrob::Models::FalsePositive.order(:repository).all
-      erb :"assessments/false_positive"
     end
 
     #Get request for false_positive table

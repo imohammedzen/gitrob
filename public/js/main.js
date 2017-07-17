@@ -20,18 +20,6 @@ $(document).ready(function() {
   //Initialize False Positive Container
   if ($("#falsePositive_table_container").length === 1) {
     initializeFalsePositiveTableEvents();
-
-    //Zendesk - Check if form pre-filled to auto open the form
-    var formFilled = false;
-    $('#new_falsePositive_form input').each(function() {
-      if ($(this).val() != '') {
-        formFilled = true;
-      }
-    });
-    if (formFilled)
-      $("#new_falsePositive_modal").modal({
-      show: true
-     });
   }
 
   $("#new_assessment_form").on("submit", function(e) {
@@ -63,13 +51,16 @@ $(document).ready(function() {
   //Add new false positive submit button event
   $("#new_falsePositive_form").on("submit", function (e) {
     e.preventDefault();
+
     $.ajax({
       url: "/falsePositive",
       type: "POST",
       data: $(this).serialize(),
       success: function(data) {
         $("#new_falsePositive_modal").modal("hide");
-        refreshFalsePositiveTable();
+        $("#update_falsepositive").data().find('td').fadeOut("fast",function() {
+          $(this).remove();
+        });
       },
       error: function(err) {
         var msg = err.responseJSON.message;
@@ -111,7 +102,7 @@ $(document).ready(function() {
   });
 
   $("#new_falsePositive_modal").on('shown.bs.modal', function (e) {
-    $("#repository").focus();
+    $("#comment").focus();
   });
 
   $("#new_falsePositive_button").on("click", function(e) {
@@ -120,6 +111,7 @@ $(document).ready(function() {
     $("#new_falsePositive_modal").modal({
       show: true
     });
+
     return false;
   });
 
@@ -161,6 +153,22 @@ $(document).ready(function() {
         $("#blob_modal_content").html(response);
       }
     });
+    $("#repository").val($(this).closest('tr').children('td.blob-repo').text());
+    $("#path").val($(this).closest('tr').children('td.blob-path').text());
+    $("#fingerprint").val($(this).data("id"));
+    $("#update_falsepositive").data($(this).closest('tr'));
+  });
+
+  $(".blob-fingerprint").on("click", function(e) {
+    e.preventDefault();
+    $("#repository").val($(this).closest('tr').children('td.blob-repo').text());
+    $("#path").val($(this).closest('tr').children('td.blob-path').text());
+    $("#fingerprint").val($(this).data("id"));
+    $("#new_falsePositive_modal").modal({
+      show: true
+    });
+    $("#update_falsepositive").data($(this).closest('tr'));
+    return false;
   });
 
   $("#blob_modal").on('hidden.bs.modal', function (e) {
