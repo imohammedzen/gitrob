@@ -61,6 +61,7 @@ $(document).ready(function() {
         $("#update_falsepositive").data().find('td').fadeOut("fast",function() {
           $(this).remove();
         });
+        $("#comment").val("");
       },
       error: function(err) {
         var msg = err.responseJSON.message;
