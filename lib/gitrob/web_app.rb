@@ -170,6 +170,7 @@ module Gitrob
       @assessments =
         Gitrob::Models::Assessment
         .where(:deleted => false)
+        .where{created_at > Date.today-14}
         .order(:created_at)
         .reverse.all
       erb :index
@@ -180,6 +181,7 @@ module Gitrob
       @assessments =
         Gitrob::Models::Assessment
         .where(:deleted => false)
+        .where{created_at > Date.today-14}
         .order(:created_at)
         .reverse.all
       erb :"assessments/_assessments", :layout => false
