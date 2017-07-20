@@ -35,7 +35,7 @@
       <% end %>
         <td class="blob-repo"><a href="/repositories/<%=h finding.repository.id %>"><%=h finding.repository.full_name %></a></td>
         <td class="blob-path"><a href="/blobs/<%=h finding.id %>" class="blob-link" title="<%=h finding.flags.map(&:caption).join(' - ') %>"  data-placement="bottom" data-id="<%=finding.sha256%>"><%= format_path(finding.path) %></a></td>
-        <td class="blob-fingerprint" ><a href="#" data-id="<%=finding.sha256%>" class="blob-fingerprint"><%=finding.sha256[0,6]%>...<%=finding.sha256[58,64]%></a></td>
+        <td class="blob-fingerprint" ><a href="#" data-id="<%=finding.sha256%>" class="blob-fingerprint-link"><%=finding.sha256[0,6]%>...<%=finding.sha256[58,64]%></a></td>
         <td class="blob-size"><%= number_to_human_size(finding.size) %></td>
         </tr>
     <% end %>

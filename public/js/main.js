@@ -160,7 +160,7 @@ $(document).ready(function() {
     $("#update_falsepositive").data($(this).closest('tr'));
   });
 
-  $(".blob-fingerprint").on("click", function(e) {
+  $(".blob-fingerprint-link").on("click", function(e) {
     e.preventDefault();
     $("#repository").val($(this).closest('tr').children('td.blob-repo').text());
     $("#path").val($(this).closest('tr').children('td.blob-path').text());
