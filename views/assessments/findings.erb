@@ -51,15 +51,15 @@
         <div class="modal-body">
             <div class="form-group">
               <label for="repository">Repository Name</label>
-              <input type="text" class="form-control" id="repository" name="falsePositive[repository]" value="<%=@repo_name%>">
+              <input type="text" readonly class="form-control" id="repository" name="falsePositive[repository]" value="<%=@repo_name%>">
             </div>
             <div class="form-group">
               <label for="path">File Path</label>
-              <input type="text" class="form-control" id="path" name="falsePositive[path]" value="<%=@fullpath%>">
+              <input type="text" readonly class="form-control" id="path" name="falsePositive[path]" value="<%=@fullpath%>">
             </div>
             <div class="form-group">
               <label for="fingerprint">Fingerprint</label>
-              <input type="text" class="form-control" id="fingerprint" name="falsePositive[fingerprint]" value="<%=@sha256%>">
+              <input type="text" readonly class="form-control" id="fingerprint" name="falsePositive[fingerprint]" value="<%=@sha256%>">
             </div>
             <div class="form-group">
               <label for="comment">Comment</label>
